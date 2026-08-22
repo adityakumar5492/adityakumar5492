@@ -4,64 +4,123 @@ on:
   push:
     branches:
       - main
+
   schedule:
     - cron: "0 0 * * *"
+
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
+
   generate-dragon:
+
     runs-on: ubuntu-latest
 
     steps:
+
+      # --------------------------------------------------
+      # Checkout
+      # --------------------------------------------------
+
       - name: Checkout repository
         uses: actions/checkout@v4
+
+
+      # --------------------------------------------------
+      # Fetch GitHub Contribution Data
+      # --------------------------------------------------
 
       - name: Fetch GitHub contribution data
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
+
         run: |
+
           gh api graphql \
             -f query='
               query($login:String!) {
+
                 user(login:$login) {
+
                   contributionsCollection {
+
                     contributionCalendar {
+
                       weeks {
+
                         contributionDays {
+
                           contributionCount
                           date
+
                         }
+
                       }
+
                     }
+
                   }
+
                 }
+
               }' \
-            -F login="$USERNAME" > contributions.json
+            -F login="$USERNAME" \
+            > contributions.json
+
+
+      # --------------------------------------------------
+      # Python
+      # --------------------------------------------------
 
       - name: Set up Python
         uses: actions/setup-python@v5
+
         with:
           python-version: "3.12"
 
+
+      # --------------------------------------------------
+      # Pillow
+      # --------------------------------------------------
+
       - name: Install Pillow
-        run: pip install pillow
+        run: |
+
+          pip install pillow
+
+
+      # --------------------------------------------------
+      # Generate Dragon
+      # --------------------------------------------------
 
       - name: Generate dragon GIF
-        run: python scripts/generate_dragon.py contributions.json
+        run: |
+
+          python scripts/generate_dragon.py contributions.json
+
+
+      # --------------------------------------------------
+      # Publish to gh-pages
+      # --------------------------------------------------
 
       - name: Publish dragon to gh-pages
         run: |
+
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
           git fetch origin gh-pages:gh-pages
 
           mkdir -p /tmp/dragon
-          cp public/dragon-contribution.gif /tmp/dragon/
+
+          cp public/dragon-contribution.gif \
+            /tmp/dragon/
 
           git checkout gh-pages
 
@@ -69,6 +128,8 @@ jobs:
 
           git add dragon-contribution.gif
 
-          git commit -m "Update dragon contribution animation" || echo "No changes"
+          git commit \
+            -m "Update dragon contribution animation" \
+            || echo "No changes"
 
           git push origin gh-pages
