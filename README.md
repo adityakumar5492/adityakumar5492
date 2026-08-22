@@ -85,7 +85,6 @@
   <img
     src="https://raw.githubusercontent.com/adityakumar5492/adityakumar5492/gh-pages/dragon-contribution.gif"
     alt="Dragon Contribution Animation"
-    width="900"
   />
 </p>
 
