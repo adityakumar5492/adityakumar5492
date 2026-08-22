@@ -30,9 +30,11 @@ jobs:
                 user(login:$login) {
                   contributionsCollection {
                     contributionCalendar {
-                      contributionDays {
-                        contributionCount
-                        date
+                      weeks {
+                        contributionDays {
+                          contributionCount
+                          date
+                        }
                       }
                     }
                   }
