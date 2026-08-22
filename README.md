@@ -79,13 +79,14 @@
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=adityakumar5492&theme=github-compact&hide_border=true&area=true" alt="Contribution Graph" />
 </p>
 
-🐍 Contribution Snake
+### 🐉 Contribution Dragon
 
 <p align="center">
   <img
-  src="https://raw.githubusercontent.com/adityakumar5492/adityakumar5492/gh-pages/github-contribution-grid-snake.svg"
-  alt="Contribution Snake"
-/>
+    src="https://raw.githubusercontent.com/adityakumar5492/adityakumar5492/gh-pages/dragon-contribution.gif"
+    alt="Dragon Contribution Animation"
+    width="900"
+  />
 </p>
 
 💻 Coding Profiles
