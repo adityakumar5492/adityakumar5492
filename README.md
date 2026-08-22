@@ -1,230 +1,175 @@
-<h1 align="center">Hi 👋, I'm Aditya Kumar</h1>
-
 <p align="center">
-  <strong>Full-Stack Developer • MERN Stack • DSA</strong>
-</p>
-
-<p align="center">
-  I build practical, scalable web applications and enjoy understanding how things work from first principles.
-</p>
-
-<p align="center">
-  <a href="https://github.com/adityakumar5492">
-    <img src="https://komarev.com/ghpvc/?username=adityakumar5492&label=Profile%20Views&color=555555&style=flat-square" alt="Profile Views" />
+  <a href="https://linkedin.com/in/aditya-kumar-9a21002ba">
+    <img src="https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin" alt="LinkedIn" />
   </a>
-  <a href="https://github.com/adityakumar5492?tab=followers">
-    <img src="https://img.shields.io/github/followers/adityakumar5492?label=Followers&style=flat-square&color=555555" alt="GitHub Followers" />
+  <a href="https://instagram.com/adityaraj8297">
+    <img src="https://img.shields.io/badge/Instagram-Profile-E4405F?style=flat-square&logo=instagram&logoColor=white" alt="Instagram" />
+  </a>
+  <a href="https://leetcode.com/u/adityakumar26/">
+    <img src="https://img.shields.io/badge/LeetCode-Profile-orange?style=flat-square&logo=leetcode" alt="LeetCode" />
+  </a>
+  <a href="https://www.geeksforgeeks.org/profile/kumaradi1sgr">
+    <img src="https://img.shields.io/badge/GeeksforGeeks-Profile-green?style=flat-square&logo=geeksforgeeks" alt="GeeksforGeeks" />
   </a>
 </p>
 
 ---
 
-## About Me
+## 👨‍💻 About Me
 
-- 🎓 B.Tech Information Technology student
-- 💻 Focused on **Full-Stack Web Development**
-- ⚡ Building applications with the **MERN Stack**
-- 🧠 Practicing **Data Structures & Algorithms with C++**
-- 🚀 Currently working on **StudySync – Collaborative Learning Platform**
-- 🤝 Open to collaborating on **MERN and open-source projects**
-- 🔍 Interested in **backend architecture and system design**
-- 📚 I prefer understanding concepts from first principles rather than simply following tutorials
-
----
-
-## Current Focus
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### 🚀 StudySync
-
-A collaborative learning platform designed to help students study together and interact in a shared learning environment.
-
-**Focus**
-
-- Full-stack architecture
-- Real-time functionality
-- Authentication
-- Collaborative features
-- Clean and scalable backend
-
-<a href="https://github.com/adityakumar5492/study-Sync">
-  View Repository →
-</a>
-
-</td>
-
-<td width="50%" valign="top">
-
-### 🧠 DSA
-
-Currently strengthening problem-solving skills using **C++**.
-
-**Focus**
-
-- Data Structures
-- Algorithms
-- Binary Search
-- Arrays & Strings
-- Problem Solving
-- Interview Preparation
-
-<a href="https://leetcode.com/u/adityakumar26/">
-  View LeetCode →
-</a>
-
-</td>
-</tr>
-</table>
-
----
-
-## Tech Stack
-
-### Languages
-
-<p>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" width="42" height="42" alt="C++"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" width="42" height="42" alt="JavaScript"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="42" height="42" alt="Python"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" width="42" height="42" alt="HTML5"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" width="42" height="42" alt="CSS3"/>
+<p align="center">
+  🎓 B.Tech IT Student &nbsp; • &nbsp;
+  💻 Full-Stack Developer &nbsp; • &nbsp;
+  ⚡ MERN Stack
+  <br><br>
+  🧠 DSA with C++ &nbsp; • &nbsp;
+  🚀 Building StudySync &nbsp; • &nbsp;
+  🔍 Backend & System Design
 </p>
 
-### Frontend
-
-<p>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" width="42" height="42" alt="React"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" width="42" height="42" alt="Redux"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" width="42" height="42" alt="Tailwind CSS"/>
-  &nbsp;
-  <img src="https://www.vectorlogo.zone/logos/framer/framer-icon.svg" width="42" height="42" alt="Framer Motion"/>
-</p>
-
-### Backend & Database
-
-<p>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" width="42" height="42" alt="Node.js"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" width="42" height="42" alt="Express.js"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" width="42" height="42" alt="MongoDB"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" width="42" height="42" alt="MySQL"/>
-</p>
-
-### Tools
-
-<p>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" width="42" height="42" alt="Git"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" width="42" height="42" alt="GitHub"/>
-  &nbsp;
-  <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" width="42" height="42" alt="Postman"/>
-  &nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/socketio/socketio-original.svg" width="42" height="42" alt="Socket.IO"/>
+<p align="center">
+  I enjoy building real projects, solving problems,<br>
+  and understanding concepts from first principles.
 </p>
 
 ---
 
-## Selected Projects
+## 🚀 Currently Building
 
-### StudySync
-**Collaborative Learning Platform**
+<p align="center">
+  <a href="https://github.com/adityakumar5492/study-Sync">
+    <img
+      src="https://github-readme-stats.vercel.app/api/pin/?username=adityakumar5492&repo=study-Sync&hide_border=true"
+      alt="StudySync"
+    />
+  </a>
+</p>
 
-A full-stack platform focused on collaborative learning and real-time interaction.
-
-**Stack:** React • Node.js • Express • MongoDB • Redux • Socket.IO
-
-[Repository →](https://github.com/adityakumar5492/study-Sync)
-
----
-
-### Event Booking System
-**Full-Stack MERN Application**
-
-A complete event booking platform with user and admin functionality.
-
-**Stack:** React • Node.js • Express • MongoDB
-
-[View my repositories →](https://github.com/adityakumar5492?tab=repositories)
+<p align="center">
+  <b>StudySync</b> — Collaborative Learning Platform
+</p>
 
 ---
 
-## GitHub Activity
+## 🛠️ Tech Stack
 
 <p align="center">
   <img
-    src="https://github-readme-stats.vercel.app/api?username=adityakumar5492&show_icons=true&hide_border=true&rank_icon=github&include_all_commits=true"
+    src="https://skillicons.dev/icons?i=cpp,js,html,css,react,redux,tailwind,nodejs,express,mongodb,mysql,git,github,postman,socketio"
+    alt="Tech Stack"
+  />
+</p>
+
+---
+
+## 📊 GitHub Statistics
+
+<p align="center">
+  <img
     height="170"
+    src="https://github-readme-stats.vercel.app/api?username=adityakumar5492&show_icons=true&hide_border=true&rank_icon=github&include_all_commits=true"
     alt="GitHub Statistics"
   />
+
   <img
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=adityakumar5492&layout=compact&hide_border=true&langs_count=8"
     height="170"
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=adityakumar5492&layout=compact&hide_border=true&langs_count=8"
     alt="Top Languages"
   />
 </p>
 
+---
+
+## 🔥 Contribution Streak
+
 <p align="center">
   <img
-    src="https://github-readme-activity-graph.vercel.app/graph?username=adityakumar5492&theme=github-compact&hide_border=true&area=true"
-    alt="Contribution Activity Graph"
+    src="https://streak-stats.demolab.com/?user=adityakumar5492&hide_border=true"
+    alt="GitHub Streak"
   />
 </p>
 
 ---
 
-## Coding Profiles
+## 📈 Contribution Activity
 
-<p>
+<p align="center">
+  <img
+    src="https://github-readme-activity-graph.vercel.app/graph?username=adityakumar5492&theme=github-compact&hide_border=true&area=true"
+    alt="Contribution Graph"
+  />
+</p>
+
+---
+
+## 🐍 Contribution Snake
+
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/adityakumar5492/adityakumar5492/output/github-contribution-grid-snake.svg"
+    alt="Contribution Snake"
+  />
+</p>
+
+---
+
+## 💻 Coding Profiles
+
+<p align="center">
   <a href="https://leetcode.com/u/adityakumar26/">
-    <img src="https://img.shields.io/badge/LeetCode-adityakumar26-181818?style=flat-square&logo=leetcode&logoColor=FFA116" alt="LeetCode"/>
+    <img
+      src="https://img.shields.io/badge/LeetCode-adityakumar26-181818?style=for-the-badge&logo=leetcode&logoColor=FFA116"
+      alt="LeetCode"
+    />
   </a>
-  &nbsp;
+
   <a href="https://www.geeksforgeeks.org/profile/kumaradi1sgr">
-    <img src="https://img.shields.io/badge/GeeksforGeeks-kumaradi1sgr-181818?style=flat-square&logo=geeksforgeeks&logoColor=2F8D46" alt="GeeksforGeeks"/>
+    <img
+      src="https://img.shields.io/badge/GeeksforGeeks-kumaradi1sgr-181818?style=for-the-badge&logo=geeksforgeeks&logoColor=2F8D46"
+      alt="GeeksforGeeks"
+    />
   </a>
 </p>
 
 ---
 
-## Connect
+## 🌐 Connect With Me
 
-<p>
+<p align="center">
+  <a href="https://github.com/adityakumar5492">
+    <img
+      src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"
+      alt="GitHub"
+    />
+  </a>
+
   <a href="https://linkedin.com/in/aditya-kumar-9a21002ba">
-    <img src="https://img.shields.io/badge/LinkedIn-Aditya%20Kumar-181818?style=flat-square&logo=linkedin&logoColor=0A66C2" alt="LinkedIn"/>
+    <img
+      src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin"
+      alt="LinkedIn"
+    />
   </a>
-  &nbsp;
-  <a href="mailto:kumaraditya26sh@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Contact%20Me-181818?style=flat-square&logo=gmail&logoColor=EA4335" alt="Email"/>
-  </a>
-  &nbsp;
+
   <a href="https://portfolio-flame-psi-66.vercel.app/">
-    <img src="https://img.shields.io/badge/Portfolio-Visit%20Website-181818?style=flat-square&logo=vercel&logoColor=white" alt="Portfolio"/>
+    <img
+      src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel"
+      alt="Portfolio"
+    />
   </a>
-</p>
 
----
-
-## Resume
-
-<p>
-  <a href="https://drive.google.com/file/d/1BjVh6grfxXcNo3f8_X5XQxVywcZPqIeA/view">
-    <img src="https://img.shields.io/badge/View%20Resume-181818?style=for-the-badge&logo=googledrive&logoColor=white" alt="Resume"/>
+  <a href="mailto:kumaraditya26sh@gmail.com">
+    <img
+      src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"
+      alt="Email"
+    />
   </a>
 </p>
 
 ---
 
 <p align="center">
-  <i>Building • Learning • Improving</i>
+  <img
+    src="https://capsule-render.vercel.app/api?type=waving&color=0:0e75b6,100:6f42c1&height=100&section=footer"
+    alt="Footer"
+  />
 </p>
