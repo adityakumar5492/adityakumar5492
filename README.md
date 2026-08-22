@@ -97,15 +97,17 @@ A full-stack collaborative learning platform designed for students to study toge
 <p align="center">
   <img
     src="https://github-readme-stats.vercel.app/api?username=adityakumar5492&show_icons=true&hide_border=true&rank_icon=github&include_all_commits=true"
+    alt="Aditya Kumar's GitHub Stats"
     height="180"
-    alt="GitHub Stats"
   />
   <img
     src="https://github-readme-stats.vercel.app/api/top-langs/?username=adityakumar5492&layout=compact&hide_border=true&langs_count=8"
+    alt="Aditya Kumar's Top Languages"
     height="180"
-    alt="Top Languages"
   />
 </p>
+
+
 
 ---
 
