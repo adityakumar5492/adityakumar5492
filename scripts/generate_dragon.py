@@ -5,6 +5,11 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+
+# =========================================================
+# INPUT / OUTPUT
+# =========================================================
+
 DATA = Path(sys.argv[1])
 OUT = Path("public")
 OUT.mkdir(exist_ok=True)
@@ -12,37 +17,52 @@ OUT.mkdir(exist_ok=True)
 with DATA.open(encoding="utf-8") as f:
     data = json.load(f)
 
-weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
+weeks = data["data"]["user"]["contributionsCollection"][
+    "contributionCalendar"
+]["weeks"]
+
 weeks = weeks[-52:]
 
-counts = [
-    [day["contributionCount"] for day in week["contributionDays"]]
-    for week in weeks
-]
+
+# =========================================================
+# CONTRIBUTION DATA
+# =========================================================
+
+counts = []
+
+for week in weeks:
+    days = week["contributionDays"]
+    counts.append([day["contributionCount"] for day in days])
+
+# Make sure every week has 7 cells
+for week in counts:
+    while len(week) < 7:
+        week.append(0)
 
 max_count = max(
     (value for week in counts for value in week),
     default=1
 )
 
-# -----------------------------
-# Canvas
-# -----------------------------
+
+# =========================================================
+# CANVAS
+# =========================================================
 
 CELL = 12
-GAP = 4
+GAP = 3
 
-LEFT = 58
-TOP = 70
+LEFT = 55
+TOP = 55
 
-GRID_W = len(weeks) * (CELL + GAP)
+GRID_W = 52 * (CELL + GAP)
 GRID_H = 7 * (CELL + GAP)
 
-WIDTH = max(900, LEFT + GRID_W + 40)
-HEIGHT = TOP + GRID_H + 70
+WIDTH = LEFT + GRID_W + 25
+HEIGHT = TOP + GRID_H + 55
 
 BG = (13, 17, 23)
-TEXT = (230, 237, 243)
+TEXT = (201, 209, 217)
 MUTED = (139, 148, 158)
 
 LEVELS = [
@@ -53,15 +73,25 @@ LEVELS = [
     (86, 211, 100),
 ]
 
+
+# =========================================================
+# FONTS
+# =========================================================
+
 try:
     font = ImageFont.truetype("DejaVuSans.ttf", 13)
-    small = ImageFont.truetype("DejaVuSans.ttf", 11)
+    small = ImageFont.truetype("DejaVuSans.ttf", 10)
 except:
     font = ImageFont.load_default()
-    small = ImageFont.load_default()
+    small = font
 
 
-def contribution_level(value):
+# =========================================================
+# CONTRIBUTION LEVEL
+# =========================================================
+
+def get_level(value):
+
     if value <= 0:
         return 0
 
@@ -69,370 +99,225 @@ def contribution_level(value):
 
     if ratio < 0.20:
         return 1
+
     if ratio < 0.45:
         return 2
+
     if ratio < 0.70:
         return 3
 
     return 4
 
 
-# -----------------------------
-# Dragon
-# -----------------------------
+# =========================================================
+# DRAW DRAGON
+# =========================================================
 
-def draw_dragon(draw, cx, cy, scale=1.0, fire=True):
-    """
-    Detailed stylized flying dragon.
-    Dragon is intentionally kept inside the canvas.
-    """
+def draw_dragon(draw, cx, cy, direction=1, fire=True):
 
-    def p(x, y):
+    # Very small dragon designed specifically
+    # to fit inside a GitHub contribution cell.
+
+    # Scale
+    s = 0.55
+
+    def P(x, y):
         return (
-            cx + x * scale,
-            cy + y * scale
+            cx + direction * x * s,
+            cy + y * s
         )
 
-    outline = (105, 32, 32)
-    dark_red = (58, 20, 24)
-    red = (115, 35, 34)
-    bright_red = (165, 48, 38)
-    wing_dark = (42, 18, 25)
-    horn = (185, 142, 92)
-
-    # -------------------------
+    # -----------------------------------------------------
     # Tail
-    # -------------------------
+    # -----------------------------------------------------
 
-    tail_points = [
-        p(-35, 15),
-        p(-75, 25),
-        p(-110, 17),
-        p(-140, 2),
-        p(-168, 12),
-        p(-145, 27),
-        p(-110, 30),
-        p(-70, 36),
-        p(-30, 32),
-    ]
-
-    draw.polygon(
-        tail_points,
-        fill=dark_red,
-        outline=outline
+    draw.line(
+        [
+            P(-5, 2),
+            P(-9, 1),
+            P(-13, 3),
+        ],
+        fill=(125, 45, 30),
+        width=2
     )
 
-    # Tail spikes
-    for tx, ty in [
-        (-90, 21),
-        (-115, 12),
-        (-140, 8),
-    ]:
-        draw.polygon(
-            [
-                p(tx, ty),
-                p(tx - 10, ty - 18),
-                p(tx + 4, ty - 2)
-            ],
-            fill=bright_red
-        )
-
-    # -------------------------
+    # -----------------------------------------------------
     # Body
-    # -------------------------
+    # -----------------------------------------------------
 
     draw.ellipse(
         [
-            p(-65, -10),
-            p(55, 45)
+            P(-7, -4),
+            P(7, 5)
         ],
-        fill=red,
-        outline=outline,
-        width=max(1, int(2 * scale))
+        fill=(105, 42, 30)
     )
 
-    # Belly
-    draw.polygon(
-        [
-            p(-25, 5),
-            p(15, 8),
-            p(38, 27),
-            p(5, 39),
-            p(-25, 29),
-        ],
-        fill=(128, 43, 38)
-    )
+    # -----------------------------------------------------
+    # Neck
+    # -----------------------------------------------------
 
-    # Belly scales
-    for i in range(4):
-        x = -12 + i * 12
-        draw.line(
-            [p(x, 15), p(x + 5, 29)],
-            fill=(190, 68, 52),
-            width=max(1, int(scale))
-        )
-
-    # -------------------------
-    # Long neck
-    # -------------------------
-
-    draw.polygon(
-        [
-            p(25, 12),
-            p(43, -10),
-            p(62, -45),
-            p(83, -65),
-            p(101, -51),
-            p(72, -18),
-            p(58, 17),
-            p(42, 28),
-        ],
-        fill=dark_red,
-        outline=outline
-    )
-
-    # Neck highlights
     draw.line(
-        [p(48, -5), p(76, -48)],
-        fill=bright_red,
-        width=max(1, int(3 * scale))
+        [
+            P(4, -1),
+            P(8, -7),
+            P(11, -10)
+        ],
+        fill=(125, 48, 32),
+        width=3
     )
 
-    # -------------------------
+    # -----------------------------------------------------
     # Head
-    # -------------------------
-
-    head = [
-        p(78, -68),
-        p(108, -75),
-        p(132, -62),
-        p(124, -42),
-        p(101, -35),
-        p(78, -43),
-    ]
-
-    draw.polygon(
-        head,
-        fill=red,
-        outline=outline
-    )
-
-    # Snout
-    draw.polygon(
-        [
-            p(108, -58),
-            p(143, -52),
-            p(132, -41),
-            p(105, -42),
-        ],
-        fill=dark_red,
-        outline=outline
-    )
-
-    # -------------------------
-    # Horns
-    # -------------------------
-
-    draw.polygon(
-        [
-            p(86, -67),
-            p(77, -91),
-            p(95, -72),
-        ],
-        fill=horn
-    )
-
-    draw.polygon(
-        [
-            p(104, -70),
-            p(108, -94),
-            p(116, -68),
-        ],
-        fill=horn
-    )
-
-    # -------------------------
-    # Eye
-    # -------------------------
+    # -----------------------------------------------------
 
     draw.ellipse(
         [
-            p(104, -58),
-            p(112, -50)
+            P(9, -13),
+            P(18, -7)
         ],
-        fill=(255, 190, 20)
+        fill=(145, 52, 32)
     )
 
-    draw.ellipse(
+    # -----------------------------------------------------
+    # Horn
+    # -----------------------------------------------------
+
+    draw.polygon(
         [
-            p(108, -57),
-            p(111, -52)
+            P(12, -12),
+            P(11, -17),
+            P(14, -13)
         ],
-        fill=(20, 10, 5)
+        fill=(180, 110, 60)
     )
 
-    # -------------------------
-    # Mouth
-    # -------------------------
-
-    draw.line(
-        [p(112, -43), p(137, -47)],
-        fill=(20, 8, 10),
-        width=max(1, int(2 * scale))
-    )
-
-    # Teeth
-    for tx in [118, 126, 133]:
-        draw.polygon(
-            [
-                p(tx, -46),
-                p(tx + 4, -38),
-                p(tx + 7, -47)
-            ],
-            fill=(235, 220, 185)
-        )
-
-    # -------------------------
-    # Large wings
-    # -------------------------
-
-    wing = [
-        p(5, 0),
-        p(-12, -82),
-        p(28, -55),
-        p(70, -103),
-        p(60, -30),
-        p(48, 8),
-    ]
+    # -----------------------------------------------------
+    # Wing
+    # -----------------------------------------------------
 
     draw.polygon(
-        wing,
-        fill=wing_dark,
-        outline=outline
+        [
+            P(0, -2),
+            P(-5, -13),
+            P(4, -9),
+            P(9, -15),
+            P(8, -2)
+        ],
+        fill=(75, 30, 29),
+        outline=(150, 55, 38)
     )
 
-    # Wing bones
-    draw.line(
-        [p(8, -2), p(-12, -82)],
-        fill=bright_red,
-        width=max(1, int(2 * scale))
-    )
-
-    draw.line(
-        [p(8, -2), p(28, -55)],
-        fill=bright_red,
-        width=max(1, int(2 * scale))
-    )
-
-    draw.line(
-        [p(8, -2), p(70, -103)],
-        fill=bright_red,
-        width=max(1, int(2 * scale))
-    )
-
-    draw.line(
-        [p(28, -55), p(60, -30)],
-        fill=bright_red,
-        width=max(1, int(2 * scale))
-    )
-
-    # -------------------------
-    # Second wing
-    # -------------------------
-
-    wing2 = [
-        p(-12, 10),
-        p(-42, -55),
-        p(-22, -44),
-        p(-65, -82),
-        p(-45, -5),
-        p(-25, 22),
-    ]
-
-    draw.polygon(
-        wing2,
-        fill=(35, 17, 23),
-        outline=outline
-    )
-
-    # -------------------------
+    # -----------------------------------------------------
     # Legs
-    # -------------------------
+    # -----------------------------------------------------
 
-    for lx in [-30, 18]:
+    draw.line(
+        [
+            P(-3, 4),
+            P(-5, 9)
+        ],
+        fill=(110, 42, 30),
+        width=2
+    )
 
-        draw.line(
-            [
-                p(lx, 30),
-                p(lx - 8, 58),
-                p(lx - 20, 65)
-            ],
-            fill=dark_red,
-            width=max(2, int(5 * scale))
-        )
+    draw.line(
+        [
+            P(4, 4),
+            P(6, 9)
+        ],
+        fill=(110, 42, 30),
+        width=2
+    )
 
-        draw.line(
-            [
-                p(lx, 30),
-                p(lx + 9, 57),
-                p(lx + 20, 61)
-            ],
-            fill=dark_red,
-            width=max(2, int(5 * scale))
-        )
+    # -----------------------------------------------------
+    # Eye
+    # -----------------------------------------------------
 
-        # claws
-        draw.line(
-            [p(lx - 20, 65), p(lx - 26, 69)],
-            fill=horn,
-            width=max(1, int(2 * scale))
-        )
+    draw.ellipse(
+        [
+            P(15, -11),
+            P(17, -9)
+        ],
+        fill=(255, 210, 60)
+    )
 
-        draw.line(
-            [p(lx + 20, 61), p(lx + 27, 64)],
-            fill=horn,
-            width=max(1, int(2 * scale))
-        )
-
-    # -------------------------
+    # -----------------------------------------------------
     # Fire
-    # -------------------------
+    # -----------------------------------------------------
 
     if fire:
 
-        flame = [
-            p(140, -48),
-            p(168, -60),
-            p(194, -48),
-            p(170, -38),
-            p(202, -25),
-            p(160, -28),
-            p(138, -37),
-        ]
+        fx = 20 * direction
 
         draw.polygon(
-            flame,
-            fill=(255, 92, 20)
+            [
+                P(fx, -10),
+                P(fx + 7 * direction, -8),
+                P(fx + 11 * direction, -5),
+                P(fx + 7 * direction, -3),
+                P(fx + 13 * direction, 0),
+                P(fx + 4 * direction, -1),
+            ],
+            fill=(255, 100, 20)
         )
 
-        inner = [
-            p(140, -46),
-            p(163, -51),
-            p(181, -45),
-            p(160, -39),
-            p(180, -32),
-            p(151, -34),
-        ]
-
         draw.polygon(
-            inner,
-            fill=(255, 210, 55)
+            [
+                P(fx, -8),
+                P(fx + 5 * direction, -6),
+                P(fx + 8 * direction, -4),
+                P(fx + 3 * direction, -3),
+            ],
+            fill=(255, 220, 70)
         )
 
 
-# -----------------------------
-# Frame
-# -----------------------------
+# =========================================================
+# CREATE SNAKE-LIKE PATH
+# =========================================================
+
+path = []
+
+for week_index in range(52):
+
+    if week_index % 2 == 0:
+
+        # left -> right
+        for day_index in range(7):
+            path.append((week_index, day_index))
+
+    else:
+
+        # right -> left
+        for day_index in range(6, -1, -1):
+            path.append((week_index, day_index))
+
+
+# =========================================================
+# CELL CENTER
+# =========================================================
+
+def cell_position(week_index, day_index):
+
+    x = (
+        LEFT
+        + week_index * (CELL + GAP)
+        + CELL / 2
+    )
+
+    y = (
+        TOP
+        + day_index * (CELL + GAP)
+        + CELL / 2
+    )
+
+    return x, y
+
+
+# =========================================================
+# DRAW FRAME
+# =========================================================
 
 def create_frame(frame_number):
 
@@ -444,22 +329,28 @@ def create_frame(frame_number):
 
     draw = ImageDraw.Draw(image)
 
+    # -----------------------------------------------------
     # Header
+    # -----------------------------------------------------
+
     draw.text(
-        (25, 20),
+        (18, 18),
         "MY GITHUB CONTRIBUTIONS",
         font=font,
         fill=TEXT
     )
 
     draw.text(
-        (25, 42),
-        "COMMIT  •  LEARN  •  BUILD  •  REPEAT",
+        (18, 36),
+        "BUILD • LEARN • COMMIT • REPEAT",
         font=small,
         fill=MUTED
     )
 
+    # -----------------------------------------------------
     # Month labels
+    # -----------------------------------------------------
+
     months = [
         "Jan", "Feb", "Mar", "Apr",
         "May", "Jun", "Jul", "Aug",
@@ -473,40 +364,49 @@ def create_frame(frame_number):
         )
 
         draw.text(
-            (x, TOP - 22),
+            (x, TOP - 16),
             month,
             font=small,
             fill=MUTED
         )
 
-    # Week labels
-    for day, label in [
+    # -----------------------------------------------------
+    # Weekday labels
+    # -----------------------------------------------------
+
+    for day, name in [
         (1, "Mon"),
         (3, "Wed"),
         (5, "Fri")
     ]:
 
+        y = TOP + day * (CELL + GAP)
+
         draw.text(
-            (
-                8,
-                TOP + day * (CELL + GAP) - 1
-            ),
-            label,
+            (8, y),
+            name,
             font=small,
             fill=MUTED
         )
 
+    # -----------------------------------------------------
     # Contribution grid
-    for week_index, week in enumerate(counts):
+    # -----------------------------------------------------
 
-        for day_index, value in enumerate(week):
+    for wi in range(52):
 
-            x = LEFT + week_index * (CELL + GAP)
-            y = TOP + day_index * (CELL + GAP)
+        for di in range(7):
 
-            color = LEVELS[
-                contribution_level(value)
-            ]
+            value = 0
+
+            if wi < len(counts):
+                if di < len(counts[wi]):
+                    value = counts[wi][di]
+
+            color = LEVELS[get_level(value)]
+
+            x = LEFT + wi * (CELL + GAP)
+            y = TOP + di * (CELL + GAP)
 
             draw.rounded_rectangle(
                 [
@@ -519,45 +419,57 @@ def create_frame(frame_number):
                 fill=color
             )
 
-    # -------------------------
-    # Dragon animation
-    # -------------------------
+    # =====================================================
+    # DRAGON MOVEMENT
+    # =====================================================
 
-    # Keep dragon completely visible.
-    start_x = 175
-    end_x = WIDTH - 210
+    # Move one cell at a time.
+    # This keeps the dragon INSIDE the calendar.
 
-    progress = frame_number / 39
+    speed = 2
 
-    dragon_x = start_x + (
-        end_x - start_x
-    ) * progress
+    current_index = (
+        frame_number * speed
+    ) % len(path)
 
-    # Smooth flying motion
-    dragon_y = (
-        TOP +
-        GRID_H / 2 -
-        10 +
-        math.sin(frame_number / 4) * 20
+    week, day = path[current_index]
+
+    # Direction of movement
+    if week % 2 == 0:
+        direction = 1
+    else:
+        direction = -1
+
+    cx, cy = cell_position(
+        week,
+        day
     )
 
-    # Wing movement
-    wing_scale = (
-        0.72 +
-        math.sin(frame_number / 2.5) * 0.03
+    # Tiny vertical floating effect
+    cy += math.sin(
+        frame_number / 2
+    ) * 1.2
+
+    # Alternate fire animation
+    fire = (
+        frame_number % 4
+        in [0, 1]
     )
 
     draw_dragon(
         draw,
-        dragon_x,
-        dragon_y,
-        scale=wing_scale,
-        fire=(frame_number % 4 != 3)
+        cx,
+        cy,
+        direction=direction,
+        fire=fire
     )
 
-    # Footer
+    # =====================================================
+    # FOOTER
+    # =====================================================
+
     draw.text(
-        (25, HEIGHT - 32),
+        (18, HEIGHT - 25),
         "Aditya Kumar  •  github.com/adityakumar5492",
         font=small,
         fill=MUTED
@@ -566,24 +478,36 @@ def create_frame(frame_number):
     return image
 
 
-# -----------------------------
-# Generate GIF
-# -----------------------------
+# =========================================================
+# GENERATE ANIMATION
+# =========================================================
 
-frames = [
-    create_frame(i)
-    for i in range(40)
-]
+frames = []
 
-output = OUT / "dragon-contribution.gif"
+TOTAL_FRAMES = len(path) // 2
+
+for i in range(TOTAL_FRAMES):
+
+    frames.append(
+        create_frame(i)
+    )
+
+
+# =========================================================
+# SAVE GIF
+# =========================================================
+
+output_file = OUT / "dragon-contribution.gif"
 
 frames[0].save(
-    output,
+    output_file,
     save_all=True,
     append_images=frames[1:],
-    duration=90,
+    duration=120,
     loop=0,
     optimize=True
 )
 
-print(f"Generated {output}")
+print(
+    f"Generated {output_file}"
+)
