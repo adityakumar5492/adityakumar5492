@@ -112,7 +112,7 @@
     <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel" alt="Portfolio" />
   </a>
   <a href="mailto:kumaraditya26sh@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail" alt="Email" />
   </a>
 </p>
 
